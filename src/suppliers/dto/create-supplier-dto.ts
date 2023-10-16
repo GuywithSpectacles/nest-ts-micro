@@ -1,4 +1,4 @@
-import { ValidateNested, IsEmail } from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 class supplierAddress {
@@ -16,7 +16,6 @@ export class CreateSupplierDTO {
   readonly supplierName: string;
   readonly supplierAddress: supplierAddress;
   readonly supplierPhone: number;
-  @IsEmail()
   readonly supplierEmailAddress: string;
   readonly supplierCurrency: string;
   readonly supplierContactPerson: string;
