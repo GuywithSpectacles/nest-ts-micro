@@ -1,7 +1,7 @@
 import { ValidateNested, IsEmail } from 'class-validator';
 import { Type } from 'class-transformer';
 
-class supplierAddress {
+class address {
   readonly addressLine1: string;
   readonly addressLine2: string;
   readonly city: string;
@@ -10,17 +10,16 @@ class supplierAddress {
 }
 
 export class CreateSupplierDTO {
-  @Type(() => supplierAddress)
+  @Type(() => address)
   @ValidateNested()
-  readonly supplierID: string;
-  readonly supplierName: string;
-  readonly supplierAddress: supplierAddress;
-  readonly supplierPhone: number;
+  readonly name: string;
+  readonly address: address;
+  readonly phone: number;
   @IsEmail()
-  readonly supplierEmailAddress: string;
-  readonly supplierCurrency: string;
-  readonly supplierContactPerson: string;
-  readonly supplierType: string;
-  readonly supplierTaxRegistrationNumber: number;
-  readonly supplierBusinessRegistrationNumber: number;
+  readonly email: string;
+  readonly currency: string;
+  readonly contactPerson: string;
+  readonly type: string;
+  readonly taxRegistrationNumber: number;
+  readonly businessRegistrationNumber: number;
 }
