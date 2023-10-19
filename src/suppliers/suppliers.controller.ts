@@ -8,17 +8,21 @@ import {
   Param,
 } from '@nestjs/common';
 import { CreateSupplierDTO } from './dto/create-supplier-dto';
+import { SuppliersService } from './suppliers.service';
+import { Supplier } from './interfaces/supplier.interface';
 
 @Controller('suppliers')
 export class SuppliersController {
+  constructor(private readonly suppliersService: SuppliersService) {}
+
   @Get()
-  findAll(): string {
-    return 'Get Supplier Data';
+  findAll(): Supplier[] {
+    return this.suppliersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): string {
-    return `Supplier ${id}`;
+  findOne(@Param('id') id): Supplier {
+    return this.suppliersService.findOne(id);
   }
 
   @Post()
