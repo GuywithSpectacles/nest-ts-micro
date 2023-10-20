@@ -30,7 +30,7 @@ export class SuppliersController {
     return `
     Name: ${createSupplierDTO.name}
     Address: ${createSupplierDTO.address.addressLine1} ${createSupplierDTO.address.addressLine2}
-    City: ${createSupplierDTO.address.city}
+    City: ${createSupplierDTO.address.city} 
     Country: ${createSupplierDTO.address.country}
     Zipcode: ${createSupplierDTO.address.zipCode}
     Phone: ${createSupplierDTO.phone}
