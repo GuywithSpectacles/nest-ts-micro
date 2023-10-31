@@ -9,64 +9,36 @@ import {
 } from '@nestjs/common';
 import { CreateSupplierDTO } from './dto/create-supplier-dto';
 import { SuppliersService } from './suppliers.service';
-import { Supplier } from './interfaces/supplier.interface';
 
 @Controller('suppliers')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
+  @Post()
+  async createSupplier(@Body() createSupplierData: CreateSupplierDTO) {
+    return await this.suppliersService.createSupplier(createSupplierData);
+  }
+
   @Get()
-  findAll(): Supplier[] {
-    return this.suppliersService.findAll();
+  getSuppliers() {
+    return this.suppliersService.getSuppliers();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): Supplier {
-    return this.suppliersService.findOne(id);
+  async getSupplier(@Param('id') id: string) {
+    return await this.suppliersService.getSupplier(id);
   }
 
-  @Post()
-  create(@Body() createSupplierDTO: CreateSupplierDTO): string {
-    return `
-    Name: ${createSupplierDTO.name}
-    Address: ${createSupplierDTO.address.addressLine1} ${createSupplierDTO.address.addressLine2}
-    City: ${createSupplierDTO.address.city} 
-    Country: ${createSupplierDTO.address.country}
-    Zipcode: ${createSupplierDTO.address.zipCode}
-    Phone: ${createSupplierDTO.phone}
-    Email: ${createSupplierDTO.email}
-    Currency: ${createSupplierDTO.currency}
-    ContactPerson: ${createSupplierDTO.contactPerson}
-    type: ${createSupplierDTO.type}
-    TaxRegistrationNumber: ${createSupplierDTO.taxRegistrationNumber}
-    BusinessRegistrationNumber: ${createSupplierDTO.businessRegistrationNumber} 
-    `;
+  @Put(':id')
+  async updateSupplier(
+    @Body() updateSupplierData: CreateSupplierDTO,
+    @Param('id') id: string,
+  ) {
+    return await this.suppliersService.updateSupplier(id, updateSupplierData);
   }
 
-  @Delete(`:id`)
-  delete(@Param('id') id): string {
-    return `Supplier ${id} has successfully been deleted`;
-  }
-
-  @Put(`:id`)
-  update(
-    @Body() updateSupplierDTO: CreateSupplierDTO,
-    @Param('id') id,
-  ): string {
-    return `
-    Update ${id} -
-    Name: ${updateSupplierDTO.name}
-    Address: ${updateSupplierDTO.address.addressLine1} ${updateSupplierDTO.address.addressLine2}
-    City: ${updateSupplierDTO.address.city}
-    Country: ${updateSupplierDTO.address.country}
-    Zipcode: ${updateSupplierDTO.address.zipCode}
-    Phone: ${updateSupplierDTO.phone}
-    Email: ${updateSupplierDTO.email}
-    Currency: ${updateSupplierDTO.currency}
-    ContactPerson: ${updateSupplierDTO.contactPerson}
-    type: ${updateSupplierDTO.type}
-    TaxRegistrationNumber: ${updateSupplierDTO.taxRegistrationNumber}
-    BusinessRegistrationNumber: ${updateSupplierDTO.businessRegistrationNumber} 
-    `;
+  @Delete()
+  async deleteSupplier(@Param('id') id: string) {
+    return await this.suppliersService.deleteSupplier(id);
   }
 }
