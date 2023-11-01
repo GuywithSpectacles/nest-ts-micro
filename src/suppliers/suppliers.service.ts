@@ -51,9 +51,6 @@ export class SuppliersService {
   async updateSupplier(id: string, updateSupplier) {
     try {
       let supplier = await this.db.get(id);
-      console.log(updateSupplier);
-      console.log(supplier);
-      console.log(supplier.address);
       if (supplier) {
         supplier = await this.db.insert({
           _id: supplier._id,
@@ -93,8 +90,6 @@ export class SuppliersService {
             : supplier.businessRegistrationNumber,
         });
 
-        supplier = await this.db.get(id);
-        console.log(supplier);
         return supplier;
       }
     } catch (error) {

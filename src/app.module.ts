@@ -17,8 +17,8 @@ import * as nano from 'nano';
           url: Config.url,
           requestDefaults: {
             auth: {
-              username: 'admin',
-              password: '960126',
+              username: Config.username,
+              password: Config.password,
             },
           },
         });
